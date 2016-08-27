@@ -19,6 +19,8 @@
             <tr>
                 <th>UsuarioId</th>
                 <th>Nome</th>
+                <th>Email</th>
+                <th>Senha</th>
             </tr>
             @*@foreach(var u in ViewBag.Usuarios)*@
             @foreach(var u in Model)
@@ -26,6 +28,8 @@
             <tr>
                 <td>@u.UsuarioId</td>
                 <td>@u.Nome</td>
+                <td>@u.Email</td>
+                <td>@u.Senha</td>
             </tr>
             }
         </table>

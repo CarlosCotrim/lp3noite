@@ -16,10 +16,16 @@
         <form action="/usuario/create" method="post">
 
             <label>UsuarioId</label>
-            <input type="text" name="UsuarioId"/>
+            <input type="number" name="UsuarioId"required min="0" step="0.1"/>
 
             <label>Nome</label>
-            <input type="text" name="Nome"/>
+            <input type="text" name="Nome" required />
+
+            <label>Email</label>
+            <input type="email" name="Email" required />
+
+            <label>Senha</label>
+            <input type="password" name="Senha" required />
 
             <button type="submit">Salvar</button>
 

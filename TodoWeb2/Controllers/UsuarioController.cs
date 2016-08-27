@@ -33,8 +33,10 @@ namespace TodoWeb2.Controllers
         {
             int id = int.Parse(form["UsuarioId"]);
             string Nome = form["Nome"];
+            string Email = form["Email"];
+            string Senha = form["Senha"];
 
-            lista.Add(new Usuario { UsuarioId = id, Nome = Nome });
+            lista.Add(new Usuario { UsuarioId = id, Nome = Nome, Email = Email, Senha = Senha });
 
             //return View();
             return RedirectToAction("Index");
