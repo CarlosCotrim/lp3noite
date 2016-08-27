@@ -1,0 +1,34 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@model IEnumerable<TodoWeb2.Models.Usuario>
+           @{
+               Layout = null;
+           }
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        <table>
+            <tr>
+                <th>UsuarioId</th>
+                <th>Nome</th>
+            </tr>
+            @*@foreach(var u in ViewBag.Usuarios)*@
+            @foreach(var u in Model)
+            {     
+            <tr>
+                <td>@u.UsuarioId</td>
+                <td>@u.Nome</td>
+            </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
