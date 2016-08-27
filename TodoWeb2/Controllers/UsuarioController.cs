@@ -14,12 +14,30 @@ namespace TodoWeb2.Controllers
         // GET: Usuario
         public ActionResult Index()
         {
-            lista.Add(new Usuario {UsuarioId = 1, Nome = "Fulano" });
-            lista.Add(new Usuario { UsuarioId = 2, Nome = "Ciclano" });
+            //lista.Add(new Usuario {UsuarioId = 1, Nome = "Fulano" });
+            //lista.Add(new Usuario { UsuarioId = 2, Nome = "Ciclano" });
 
             //ViewBag.Usuarios = lista;
 
             return View(lista);
+        }
+
+        //GET: /usuario/create
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(FormCollection form)
+        {
+            int id = int.Parse(form["UsuarioId"]);
+            string Nome = form["Nome"];
+
+            lista.Add(new Usuario { UsuarioId = id, Nome = Nome });
+
+            //return View();
+            return RedirectToAction("Index");
         }
     }
 }

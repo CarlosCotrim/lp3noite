@@ -1,0 +1,29 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    <div> 
+        <!--/usuario/create?UsuarioId=3&Nome=Beltrano -->
+        <form action="/usuario/create" method="post">
+
+            <label>UsuarioId</label>
+            <input type="text" name="UsuarioId"/>
+
+            <label>Nome</label>
+            <input type="text" name="Nome"/>
+
+            <button type="submit">Salvar</button>
+
+        </form>
+    </div>
+</body>
+</html>
