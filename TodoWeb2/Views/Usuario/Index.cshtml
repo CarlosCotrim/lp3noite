@@ -12,29 +12,36 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-    <div> 
-        <table>
+    <div class="container"> 
+        <table class="table table-hover">
             <tr>
                 <th>UsuarioId</th>
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Senha</th>
+                <th>Ações</th>
             </tr>
             @*@foreach(var u in ViewBag.Usuarios)*@
-            @foreach(var u in Model)
-            {     
-            <tr>
-                <td>@u.UsuarioId</td>
-                <td>@u.Nome</td>
-                <td>@u.Email</td>
-                <td>@u.Senha</td>
-            </tr>
+            @foreach (var u in Model)
+            {
+                <tr>
+                    <td>@u.UsuarioId</td>
+                    <td>@u.Nome</td>
+                    <td>@u.Email</td>
+                    <td>@u.Senha</td>
+                    <td>
+                        <a href="/usuario/update/@u.UsuarioId">Editar</a>
+                        <a href="/usuario/delete/@u.UsuarioId">Apagar</a>
+                </tr>
             }
         </table>
 
-         <a href="/usuario/create">Adicionar</a>
+         <a class="btn btn-primary btn-sm" href="/usuario/create">
+        <span class="glyphicon glyphicon-plus"></span>
+        Adicionar</a>
     </div>
 </body>
 </html>

@@ -41,5 +41,45 @@ namespace TodoWeb2.Controllers
             //return View();
             return RedirectToAction("Index");
         }
+        //GET: /usuario/update/6   <-----exemplo
+        public ActionResult Update(int id)
+        {
+            foreach (var item in lista)
+            {
+                if (item.UsuarioId == id)
+                {
+                    return View(item);
+                }
+            }
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult update(FormCollection form)//aplicando as alteraçoes
+        {
+            int id = int.Parse(form["UsuarioId"]);
+            foreach (var item in lista)
+            {
+                if (item.UsuarioId == id)
+                {
+                    item.Nome = form["Nome"];
+                    item.Email = form["Email"];
+                }
+            }
+            return RedirectToAction("Index");
+        }
+        public ActionResult Delete(int id)
+        {
+            foreach (var item in lista)
+            {
+                if (item.UsuarioId == id)
+                {
+                    lista.Remove(item);
+                    break;
+                }
+
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
