@@ -1,21 +1,11 @@
 ﻿
-@{
-    Layout = null;
-}
-
 <!DOCTYPE html>
 @model IEnumerable<TodoWeb2.Models.Usuario>
            @{
-               Layout = null;
+               ViewBag.Title = "Index";
+               Layout = "/Views/Shared/_LayoutPage.cshtml";
            }
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body>
-    <div class="container"> 
+    
         <table class="table table-hover">
             <tr>
                 <th>UsuarioId</th>
@@ -23,6 +13,7 @@
                 <th>Email</th>
                 <th>Senha</th>
                 <th>Ações</th>
+     
             </tr>
             @*@foreach(var u in ViewBag.Usuarios)*@
             @foreach (var u in Model)
@@ -42,6 +33,5 @@
          <a class="btn btn-primary btn-sm" href="/usuario/create">
         <span class="glyphicon glyphicon-plus"></span>
         Adicionar</a>
-    </div>
-</body>
-</html>
+  
+

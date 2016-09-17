@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        @if(ViewBag.Erro != null)
+        { 
+        <div class="alert alert-warning">
+            @ViewBag.Erro
+        </div>
+        }
+        <form action="/usuario/login" method="post">
+            <div>
+                <label>E-mail</label>
+                <input type="email" name="Email" />
+            </div>
+
+            <div>
+                <label>Senha</label>
+                <input type="password" name="Senha" />
+
+            </div>
+
+            <button type="submit">Entrar</button>
+
+        </form>
+
+    </div>
+</body>
+</html>

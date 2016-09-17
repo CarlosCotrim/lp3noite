@@ -9,7 +9,7 @@ namespace TodoWeb2.Controllers
 {
     public class UsuarioController : Controller
     {
-        static List<Usuario> lista = new List<Usuario>();
+        //static List<Usuario> lista = new List<Usuario>();
 
         // GET: Usuario
         public ActionResult Index()
@@ -19,7 +19,12 @@ namespace TodoWeb2.Controllers
 
             //ViewBag.Usuarios = lista;
 
-            return View(lista);
+            using (TodoContext ctx = new TodoContext())
+            {
+           
+           List<Usuario> usuarios = ctx.Usuarios.ToList();
+            return View(usuarios);
+        }//dispose
         }
 
         //GET: /usuario/create
@@ -31,12 +36,24 @@ namespace TodoWeb2.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection form)
         {
-            int id = int.Parse(form["UsuarioId"]);
+            //int id = int.Parse(form["UsuarioId"]);
             string Nome = form["Nome"];
             string Email = form["Email"];
             string Senha = form["Senha"];
 
-            lista.Add(new Usuario { UsuarioId = id, Nome = Nome, Email = Email, Senha = Senha });
+            Usuario u = new Usuario
+            {
+                Nome = Nome,
+                Email = Email,
+                Senha = Senha
+            };
+
+            using (TodoContext ctx = new TodoContext())
+            {
+                ctx.Usuarios.Add(u);
+                ctx.SaveChanges();
+            }
+             
 
             //return View();
             return RedirectToAction("Index");
@@ -44,42 +61,67 @@ namespace TodoWeb2.Controllers
         //GET: /usuario/update/6   <-----exemplo
         public ActionResult Update(int id)
         {
-            foreach (var item in lista)
+            using (TodoContext ctx = new TodoContext())
             {
-                if (item.UsuarioId == id)
-                {
-                    return View(item);
-                }
+             
+                Usuario u = ctx.Usuarios.Find(id); //so o id
+               //Usuario u = ctx.Usuarios.SingleOrDefault(e => e.UsuarioId == id); //clausula where
+                return View(u);
             }
-            return RedirectToAction("Index");
+
+            
         }
         [HttpPost]
-        public ActionResult update(FormCollection form)//aplicando as alteraçoes
+        public ActionResult update(int id, FormCollection form)//aplicando as alteraçoes
         {
-            int id = int.Parse(form["UsuarioId"]);
-            foreach (var item in lista)
+            using (TodoContext ctx = new TodoContext())
             {
-                if (item.UsuarioId == id)
-                {
-                    item.Nome = form["Nome"];
-                    item.Email = form["Email"];
-                }
+                Usuario u = ctx.Usuarios.Find(id);
+                u.Nome = form["Nome"];
+                u.Email = form["Email"];
+
+                ctx.Entry(u).State = System.Data.Entity.EntityState.Modified;
+                ctx.SaveChanges();
             }
             return RedirectToAction("Index");
         }
         public ActionResult Delete(int id)
         {
-            foreach (var item in lista)
+            using (TodoContext ctx = new TodoContext())
             {
-                if (item.UsuarioId == id)
-                {
-                    lista.Remove(item);
-                    break;
-                }
+                Usuario u = ctx.Usuarios.Find(id);
 
+                ctx.Usuarios.Remove(u);
+                ctx.SaveChanges();
             }
 
             return RedirectToAction("Index");
+        }
+        
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(FormCollection form)
+        {
+            string email = form["Email"];
+            string senha = form["Senha"];
+
+            using (TodoContext ctx = new TodoContext())
+            {
+                Usuario user = ctx.Usuarios.SingleOrDefault(u => u.Email == email && u.Senha == senha);
+
+                if (user != null)
+                {
+                    Session["usuario"] = user;
+                    Session.Timeout = 1440;
+                    return RedirectToAction("Index");
+                }
+            }
+            ViewBag.Erro = "Usuario ou senha incorretos";
+            return View();
         }
     }
 }

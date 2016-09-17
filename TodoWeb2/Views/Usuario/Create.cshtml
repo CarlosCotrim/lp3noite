@@ -1,24 +1,15 @@
-﻿@{
-    Layout = null;
+﻿<!DOCTYPE html>
+  @{
+      ViewBag.Title = "Create";
+      Layout = "/Views/Shared/_LayoutPage.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body>
-    <div class="container">
-        <!--/usuario/create?UsuarioId=3&Nome=Beltrano -->
         <form action="/usuario/create" method="post">
 
-            <div class="form-group">
+            @*<div class="form-group">
                 <label>UsuarioId</label>
                 <input type="number" name="UsuarioId" required class="form-control" />
-            </div>
+            </div>*@
 
             <div class="form-group">
                 <label>Nome</label>
@@ -34,6 +25,10 @@
             <label>Senha</label>
                 <input type="password" name="Senha" required class="form-control" />
             </div>
+            <div class="form-group">
+            <label>Categoria</label>
+             <input type="text" name="Categoria" required class="form-control"/>
+            </div>
             <button type="submit" class="btn-success">
                 <span class="glyphicon glyphicon-floppy-disk"></span>
                 Salvar</button>
@@ -43,6 +38,4 @@
             </a>
 
         </form>
-    </div>
-</body>
-</html>
+  

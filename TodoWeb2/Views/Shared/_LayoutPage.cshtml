@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+        <div class="container">
+        <h1>TodoWeb</h1>
+            @{
+                TodoWeb2.Models.Usuario user = (TodoWeb2.Models.Usuario)Session["usuario"];//aparece o nome do usuario logado
+                <span>@user.Nome</span>
+            }
+
+        @RenderBody()
+
+        <hr/>
+        Desenvolvido por Carlos Cotrim
+    </div>
+</body>
+</html>

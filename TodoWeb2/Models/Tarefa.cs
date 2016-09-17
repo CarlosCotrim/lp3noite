@@ -14,7 +14,10 @@ namespace TodoWeb2.Models
         #region chaves estrangeiras
         public int UsuarioId { get; set; }
         public int CategoriaId { get; set; }
+
+        public virtual Usuario Usuario { get; set; }
+
+        public virtual Categoria Categoria { get; set; }
         #endregion
     }
 }
-//teste
